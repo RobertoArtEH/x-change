@@ -6,7 +6,9 @@
           <x-icon class="mr-2" />
           <span class="font-semibold text-xl tracking-tight">X-Change</span>
         </div>
-        <div class="hidden sm:block w-full blok flex-grow lg:flex lg:items-center lg:wauto">
+        <div
+          class="hidden sm:block w-full blok flex-grow lg:flex lg:items-center lg:wauto"
+        >
           <div class="text-sm lg:flex-grow"></div>
         </div>
       </nav>
@@ -15,7 +17,7 @@
 </template>
 
 <script>
-import xIcon from '@/components/xIcon';
+import xIcon from '@/components/xIcon'
 
 export default {
   name: 'xHeader',

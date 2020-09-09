@@ -14,7 +14,9 @@
       </tr>
     </thead>
     <tbody>
-      <tr class="border-b border-gray-200 hover:bg-gray-100 hover:bg-orange-100">
+      <tr
+        class="border-b border-gray-200 hover:bg-gray-100 hover:bg-orange-100"
+      >
         <td></td>
         <td></td>
         <td></td>
@@ -29,7 +31,7 @@
 
 <script>
 export default {
-  name: "PxAssetsTable",
+  name: 'PxAssetsTable',
 
   props: {
     assets: {
@@ -37,16 +39,16 @@ export default {
       default: () => []
     }
   }
-};
+}
 </script>
 
 <style scoped>
 .up::before {
-  content: "👆";
+  content: '👆';
 }
 
 .down::before {
-  content: "👇";
+  content: '👇';
 }
 
 td {

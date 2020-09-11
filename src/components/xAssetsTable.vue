@@ -42,7 +42,13 @@
         </td>
         <td>{{ a.priceUsd | dollar }}</td>
         <td>{{ a.marketCapUsd | dollar }}</td>
-        <td :class="a.changePercent24Hr.includes('-') ? 'text-red-600' : 'text-green-600'">
+        <td
+          :class="
+            a.changePercent24Hr.includes('-')
+              ? 'text-red-600'
+              : 'text-green-600'
+          "
+        >
           {{ a.changePercent24Hr | percent }}
         </td>
         <td class="hidden sm:block">

@@ -20,10 +20,7 @@ export default {
   },
 
   created() {
-    api.getAssets().then(assets => {
-      console.log(assets)
-      this.assets = assets
-    })
+    api.getAssets().then(assets => (this.assets = assets))
   }
 }
 </script>

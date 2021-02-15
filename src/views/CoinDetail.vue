@@ -1,11 +1,13 @@
 <template>
   <div class="flex-col">
     <div class="flex justify-center">
-      <bounce-loader :loading="isLoading" :color="'#68d391'" :size="100" />
+      <bounce-loader :loading="isLoading" :color="'#8E51C3'" :size="100" />
     </div>
 
     <template v-if="!isLoading">
-      <div class="flex flex-col sm:flex-row justify-around items-center">
+      <div
+        class="flex flex-col py-10 lg:py-0 lg:flex-row justify-around items-center bg-table rounded-lg shadow-md"
+      >
         <div class="flex flex-col items-center">
           <img
             :src="
@@ -49,10 +51,10 @@
           </ul>
         </div>
 
-        <div class="my-10 sm:mt-0 flex flex-col justify-center text-center">
+        <div class="flex flex-col justify-center text-center">
           <button
             @click="toggleConverter"
-            class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+            class="bg-purple-700 hover:bg-purple-600 text-white font-medium py-2 px-4 rounded"
           >
             {{ fromUsd ? `USD a ${asset.symbol}` : `${asset.symbol} a USD` }}
           </button>
@@ -83,18 +85,20 @@
         :data="history.map(h => [h.date, parseFloat(h.priceUsd).toFixed(2)])"
       />
 
-      <h3 class="text-xl my-10">Mejores Ofertas de Cambio</h3>
-      <table>
+      <h3 class="font-semibold text-xl my-10">Mejores Ofertas de Cambio</h3>
+      <table class="bg-table rounded-lg shadow-md">
         <tr
-          v-for="m in markets"
+          v-for="(m, idx) in markets"
           :key="`${m.exchangeId}-${m.priceUsd}`"
-          class="border-b"
+          :class="idx !== markets.length - 1 && 'border-b border-gray-800'"
         >
-          <td>
+          <td class="font-medium">
             <b>{{ m.exchangeId }}</b>
           </td>
-          <td>{{ m.priceUsd | dollar }}</td>
-          <td>{{ m.baseSymbol }} / {{ m.quoteSymbol }}</td>
+          <td class="font-semibold">{{ m.priceUsd | dollar }}</td>
+          <td class="font-semibold">
+            {{ m.baseSymbol }} / {{ m.quoteSymbol }}
+          </td>
           <td>
             <x-button
               v-if="!m.url"
@@ -103,7 +107,12 @@
             >
               <slot>Obtener enlace</slot>
             </x-button>
-            <a v-else class="hover:underline text-green-600" target="_blanck">
+            <a
+              class="hover:underline text-purple-600 cursor-pointer"
+              :href="m.url"
+              target="_blank"
+              v-else
+            >
               {{ m.url }}
             </a>
           </td>
@@ -218,5 +227,9 @@ export default {
 td {
   padding: 10px;
   text-align: center;
+}
+
+.bg-table {
+  background-color: #1F1B3A;
 }
 </style>

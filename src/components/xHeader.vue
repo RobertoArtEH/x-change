@@ -1,25 +1,22 @@
 <template>
-  <header class="shadow w-screen">
+  <header class="shadow-lg sticky">
     <nav>
-      <nav class="flex items-center justify-between flex-wrap bg-green-400 p-6">
-        <div class="flex items-center flex-shrink-0 text-white mr-6">
-          <x-icon class="mr-2" />
+      <nav class="flex items-center justify-around flex-wrap bg-header p-6">
+        <div class="flex items-center flex-shrink-0 text-white flex-grow">
           <router-link
             :to="{ name: 'home' }"
             class="font-semibold text-xl tracking-tight"
           >
-            X-Change
+            <img class="h-8" src="../assets/images/xchange.svg" />
           </router-link>
         </div>
-        <div
-          class="hidden sm:block blok flex-grow lg:flex lg:items-center lg:wauto"
-        >
+        <div class="sm:block lg:flex lg:items-center lg:wauto">
           <div class="text-sm lg:flex-grow">
             <router-link
               v-for="l in links"
               :key="l.title"
               :to="l.to"
-              class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4"
+              class="block mt-4 inline-block lg:mt-0 text-white mr-4 font-bold"
             >
               {{ l.title }}
             </router-link>
@@ -31,11 +28,8 @@
 </template>
 
 <script>
-import xIcon from '@/components/xIcon'
-
 export default {
   name: 'xHeader',
-  components: { xIcon },
 
   props: {
     links: {
@@ -45,3 +39,13 @@ export default {
   }
 }
 </script>
+
+<style>
+img {
+  pointer-events: none;
+}
+
+.bg-header {
+  background-color: #181533;
+}
+</style>

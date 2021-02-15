@@ -1,11 +1,11 @@
 <template>
-  <table>
+  <table class="bg-table rounded-lg shadow-md">
     <thead>
-      <tr class="bg-gray-100 border-b-2 border-gray-400">
+      <tr class="border-b-2 border-gray-600">
         <th></th>
         <th :class="{ up: this.sortOrder === 1, down: this.sortOrder === -1 }">
-          <span class="underline cursor-pointer" @click="changeSortOrder">
-            Ranking
+          <span class="cursor-pointer" @click="changeSortOrder">
+            #
           </span>
         </th>
         <th>Nombre</th>
@@ -14,7 +14,7 @@
         <th>Variación 24hs</th>
         <td class="hidden sm:block">
           <input
-            class="bg-gray-100 focus:outline-none border-b border-gray-400 py-2 px-4 block w-full appearance-none leading-normal"
+            class="bg-gray-100 focus:outline-none border-b border-gray-400 py-2 px-4 block w-full appearance-none leading-normal rounded"
             id="filter"
             placeholder="Buscar..."
             type="text"
@@ -23,15 +23,17 @@
         </td>
       </tr>
     </thead>
+
     <tbody>
       <tr
-        v-for="a in filteredAssets"
+        v-for="(a, idx) in filteredAssets"
         :key="a.id"
-        class="border-b border-gray-200 hover:bg-gray-100 hover:bg-orange-100"
+        class="hover:bg-purple-900"
+        :class="idx !== filteredAssets.length - 1 && 'border-b border-gray-800'"
       >
         <td>
           <img
-            class="w-6 h-6"
+            class="w-6 h-6 mx-2 lg:mx-0"
             :src="
               `https://static.coincap.io/assets/icons/${a.symbol.toLowerCase()}@2x.png`
             "
@@ -43,16 +45,17 @@
         </td>
         <td>
           <router-link
-            class="hover:underline text-green-600"
+            class="font-bold"
             :to="{ name: 'coin-detail', params: { id: a.id } }"
           >
             {{ a.name }}
           </router-link>
           <small class="ml-1 text-gray-500">{{ a.symbol }}</small>
         </td>
-        <td>{{ a.priceUsd | dollar }}</td>
-        <td>{{ a.marketCapUsd | dollar }}</td>
+        <td class="font-bold">{{ a.priceUsd | dollar }}</td>
+        <td class="font-bold">{{ a.marketCapUsd | dollar }}</td>
         <td
+          class="font-bold"
           :class="
             a.changePercent24Hr.includes('-')
               ? 'text-red-600'
@@ -63,7 +66,7 @@
         </td>
         <td class="hidden sm:block">
           <x-button @click="goToCoin(a.id)">
-            <span>Detalle</span>
+            <span>Detalles</span>
           </x-button>
         </td>
       </tr>
@@ -75,7 +78,7 @@
 import xButton from '@/components/xButton'
 
 export default {
-  name: 'PxAssetsTable',
+  name: 'xAssetsTable',
 
   components: { xButton },
 
@@ -126,12 +129,12 @@ export default {
 </script>
 
 <style scoped>
-.up::before {
-  content: '👆';
+.up::after {
+  content: '▲';
 }
 
-.down::before {
-  content: '👇';
+.down::after {
+  content: '▼';
 }
 
 td {
@@ -155,5 +158,9 @@ th {
   th {
     padding: 12px;
   }
+}
+
+.bg-table {
+  background-color: #1F1B3A;
 }
 </style>
